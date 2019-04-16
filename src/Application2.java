@@ -25,7 +25,7 @@ public class Application2 {
 			@Override
 			public void run() {
 				seq_no++;
-				System.out.println("hello from p2");
+				System.out.println("\t\t\t\t\t\t\t P2 is sending RED packet now");
 				int ttl=8;
 				try {
 					DatagramSocket ds = new DatagramSocket();
@@ -70,6 +70,7 @@ public class Application2 {
 			String input=data(receive).toString();
 			
 			input=app.parseInput(input);
+			if(app.pack.seq_num==20||app.pack.seq_num==30) System.out.println("coming");
 			if(input.equals("red")) 
 			{
 				//System.out.println("green sent");
@@ -136,7 +137,7 @@ public class Application2 {
 		byte buf[] = null; 
 		packet p1=new packet(p.color,p.ttl,p.seq_num,p.source_id);
 		
-		buf=p1.packet_format(p.color, p.ttl, seq_no,src_id );
+		buf=p1.packet_format(p.color, p.ttl, p.seq_num,p.source_id );
 		
 		DatagramPacket DpSend = 
 				new DatagramPacket(buf, buf.length, ip, port); 
@@ -166,6 +167,7 @@ public class Application2 {
 		ttl=Integer.parseInt(st.nextToken());
 		seq_num=Integer.parseInt(st.nextToken());
 		source_id=Integer.parseInt(st.nextToken());
+		pack=null;
 		packet p=new packet(color, ttl, seq_num, source_id);
 		pack=p;
 		

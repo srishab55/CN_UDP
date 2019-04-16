@@ -29,7 +29,7 @@ public class Application {
 			@Override
 			public void run() {
 				seq_no++;
-				System.out.println("hello from p1");
+				System.out.println("\t\t\t\t\t\t\t P1 is sending RED packet now");
 				int ttl=8;
 				try {
 					DatagramSocket ds = new DatagramSocket();
@@ -154,6 +154,7 @@ public class Application {
 		ttl=Integer.parseInt(st.nextToken());
 		seq_num=Integer.parseInt(st.nextToken());
 		source_id=Integer.parseInt(st.nextToken());
+		pack=null;
 		packet p=new packet(color, ttl, seq_num, source_id);
 		pack=p;
 	//	System.out.println(color);
@@ -184,7 +185,7 @@ void sendData(packet p,int port)
 	byte buf[] = null; 
 	packet p1=new packet(p.color,p.ttl,p.seq_num,p.source_id);
 	
-	buf=p1.packet_format(p.color, p.ttl, seq_no,src_id );
+	buf=p1.packet_format(p.color, p.ttl, p.seq_num,p.source_id );
 	
 	DatagramPacket DpSend = 
 			new DatagramPacket(buf, buf.length, ip, port); 
